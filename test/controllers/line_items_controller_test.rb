@@ -23,7 +23,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select 'h2', 'Your Cart'
-    assert_select 'li', 'MyString02'
+    assert_select 'li', "1 \u00D7 MyString02" # escape sequence \u00D7 equivalent to 'x'
 
   end
 
