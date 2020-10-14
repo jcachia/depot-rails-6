@@ -50,6 +50,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     delete line_item_url(@line_item)
     @line_item.reload
     assert_equal 3, @line_item.quantity
+    assert_redirected_to cart_url
   end
 
   test "should destroy when quantity = 1" do
@@ -58,6 +59,8 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('LineItem.count', -1) do
       delete line_item_url(@line_item)
     end
+
+    assert_redirected_to cart_url
   end
 
   # test "should destroy line_item" do
