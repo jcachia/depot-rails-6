@@ -1,7 +1,8 @@
 class LineItemsController < ApplicationController
   include CurrentCart
   include VisitCount
-  
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_line_item
+
   before_action :set_cart, only: [:create]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
@@ -71,6 +72,11 @@ class LineItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_line_item
       @line_item = LineItem.find(params[:id])
+    end
+
+    def invalid_line_item
+      logger.error "Attempt to access invalid line_item id #{params[:id]}"
+      redirect_to line_items_url, notice: 'Invalid line_item'
     end
 
     # Only allow a list of trusted parameters through.
