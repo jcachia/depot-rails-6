@@ -16,7 +16,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create line_item" do
-    assert_difference('LineItem.count') do
+    assert_difference('LineItem.count', 1) do
       post line_items_url, params: { product_id: products(:two).id }
     end
 
@@ -44,11 +44,30 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to line_item_url(@line_item)
   end
 
-  test "should destroy line_item" do
+  test "should remove one quantity when quantity > 1" do
+    @line_item.quantity = 4
+    @line_item.save
+    delete line_item_url(@line_item)
+    @line_item.reload
+    assert_equal 3, @line_item.quantity
+    assert_redirected_to cart_url
+  end
+
+  test "should destroy when quantity = 1" do
+    @line_item.quantity = 1
+    @line_item.save
     assert_difference('LineItem.count', -1) do
       delete line_item_url(@line_item)
     end
 
-    assert_redirected_to line_items_url
+    assert_redirected_to cart_url
   end
+
+  # test "should destroy line_item" do
+  #   assert_difference('LineItem.count', -1) do
+  #     delete line_item_url(@line_item)
+  #   end
+  #
+  #   assert_redirected_to line_items_url
+  # end
 end
