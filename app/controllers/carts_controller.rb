@@ -1,4 +1,5 @@
 class CartsController < ApplicationController
+  include VerifyCart
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
@@ -11,6 +12,7 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
+    redirect_to store_index_url, notice: 'Not your cart' unless verify_cart(@cart)
   end
 
   # GET /carts/new

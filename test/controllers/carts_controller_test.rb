@@ -23,7 +23,17 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to cart_url(Cart.last)
   end
 
-  test "should show cart" do
+  test "should not show cart if not the session cart" do
+    post line_items_url, params: { product_id: products(:two).id } # make a new cart in the session.
+    get cart_url(@cart)
+    assert_not_equal @cart.id, session[:cart_id]
+    assert_redirected_to store_index_url
+  end
+
+  test "should show cart if the cart is the session cart" do
+    post line_items_url, params: { product_id: products(:two).id } # make a new cart in the session.
+    @cart = Cart.find(session[:cart_id])
+    assert_equal @cart.id, session[:cart_id]
     get cart_url(@cart)
     assert_response :success
   end
