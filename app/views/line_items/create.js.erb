@@ -1,2 +1,7 @@
+
 cart = document.getElementById("cart")
 cart.innerHTML = "<%= j render(@cart) %>"
+
+// since we aren't updating the whole page, need to clear the notice if present from a prior action
+notice = document.getElementById("notice")
+if (notice) notice.style.display = "none"
