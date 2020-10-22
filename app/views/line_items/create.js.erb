@@ -1,6 +1,8 @@
 
 cart = document.getElementById("cart")
 cart.innerHTML = "<%= j render(@cart) %>"
+// This is necessary if the cart was previously hidden in the destory action.
+cart.style.display = "";
 
 // since we aren't updating the whole page, need to clear the notice if present from a prior action
 notice = document.getElementById("notice")

@@ -61,6 +61,7 @@ class CartsController < ApplicationController
     session[:cart_id] = nil # Could use the reset_cart module here!
     respond_to do |format|
       format.html { redirect_to store_index_url, notice: 'Your cart has been emptied.' }
+      format.js
       format.json { head :no_content }
     end
   end
