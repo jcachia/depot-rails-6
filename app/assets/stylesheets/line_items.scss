@@ -1,3 +1,18 @@
 // Place all the styles related to the LineItems controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+// defines the automation called 'line-item-highlight'
+// inside are the states of the element at the point (shown as a percentage) during the duration of the animation.
+@keyframes line-item-highlight {
+  0% {
+    background: yellow;
+  }
+  100% {
+    background: none;
+  }
+}
+// then this css class uses that attribute when assigned.
+.line-item-highlight {
+  animation: line-item-highlight 1s;
+}
