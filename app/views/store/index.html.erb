@@ -8,7 +8,7 @@
 <ul class="catalog">
   <% @products.each do |product| %>
     <li>
-      <%= image_tag(product.image_url) %>
+      <%= link_to image_tag(product.image_url), line_items_path(product_id: product), method: :post, remote: true  %>
       <h2><%= product.title %></h2>
       <p>
         <%= sanitize(product.description) %>
