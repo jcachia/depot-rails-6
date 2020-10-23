@@ -64,7 +64,9 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item.remove_one_item!
     respond_to do |format|
-      format.html { redirect_to @line_item.cart, notice: 'Line item was successfully removed.' }
+      # format.html { redirect_to @line_item.cart, notice: 'Line item was successfully removed.' }
+      format.html { redirect_to store_index_url }
+      format.js   { @cart = @line_item.cart }
       format.json { head :no_content }
     end
   end
