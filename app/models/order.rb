@@ -7,8 +7,10 @@ class Order < ApplicationRecord
   validates :name, :address, :email, presence: true
   validates :pay_type, inclusion: pay_types.keys
 
-  def self.add_line_items_to_cart(cart)
-    cart.line_item.each do |item|
+  has_many :line_items, dependent: :destroy
+
+  def add_line_items_to_cart(cart)
+    cart.line_items.each do |item|
       item.cart_id = nil
       line_items << item
     end

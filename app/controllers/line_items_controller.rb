@@ -3,8 +3,6 @@ class LineItemsController < ApplicationController
   include VisitCount
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_line_item
 
-  has_many :line_items, dependant: :destroy
-
   before_action :set_cart, only: [:create]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
