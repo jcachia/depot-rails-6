@@ -76,6 +76,7 @@ class ProductsController < ApplicationController
         format.atom
         format.html
         format.json
+        format.xml { render xml: @latest_order }
       end
     end
   end
