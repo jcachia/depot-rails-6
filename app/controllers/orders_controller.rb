@@ -34,6 +34,7 @@ class OrdersController < ApplicationController
       if @order.save
         Cart.destroy(session[:cart_id]) # why not @cart.destroy? we should already have the right cart.
         session[:cart_id] = nil
+        OrderMailer.received(@order).deliver_later
         format.html { redirect_to store_index_url, notice: "Thank you for your order!  You're awesome!" }
         format.json { render :show, status: :created, location: @order }
       else
