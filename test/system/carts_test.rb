@@ -35,6 +35,13 @@ class CartsTest < ApplicationSystemTestCase
 
   end
 
+  test "highlights a new item in cart" do
+    visit store_index_url
+    assert_no_selector '.line-item-highlight'
+    click_on 'Add to Cart', match: :first
+    assert_selector '.line-item-highlight'
+  end
+
   # test "creating a Cart" do
   #   visit carts_url
   #   click_on "New Cart"
