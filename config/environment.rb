@@ -5,7 +5,7 @@ require_relative 'application'
 Rails.application.initialize!
 
 Rails.application.configure do
-  config.action_mailer.delivery_method = :smtp # or :sendmail or :test.  sendmail will send to the local system's sendmail program, assumed to be in /usr/sbin.
+  # config.action_mailer.delivery_method = :smtp # or :sendmail or :test.  sendmail will send to the local system's sendmail program, assumed to be in /usr/sbin.
 
   # Some Gmail defaults:
   config.action_mailer.smtp_settings = {
