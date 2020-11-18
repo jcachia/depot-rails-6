@@ -11,6 +11,8 @@ class Order < ApplicationRecord
 
   has_many :line_items, dependent: :destroy
 
+  before_save :submit_ship_order_job, if: :will_save_change_to_ship_date?
+
   def add_line_items_to_cart(cart)
     cart.line_items.each do |item|
       item.cart_id = nil
@@ -45,5 +47,16 @@ class Order < ApplicationRecord
     else
       raise payment_result.error
     end
+  end
+
+  def ship!
+    # do the shipping stuff
+    # print a label
+    # maybe interface with shipping service
+    OrderMailer.shipped(self).deliver_later
+  end
+
+  def submit_ship_order_job
+    ShipOrderJob.perform_later(self)
   end
 end
