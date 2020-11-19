@@ -22,7 +22,15 @@ class Pago
 
     sleep 3 unless Rails.env.test? # Don't slow down the tests.
 
-    Rails.logger.info "Done Processing Payment"
-    OpenStruct.new(succeeded?: true) # value = Pago.make_payment(params).  value.succeeded? == true
+    # make a random failure
+    n = rand(10)
+    Rails.logger.info("n = #{n}.  If n is 10, payment fails...")
+    if n % 10 == 0
+      Rails.logger.error("Error in processing payment!  Payment for #{order_id} with payment type #{payment_method} failed!  Admin notified!")
+      OpenStruct.new(succeeded?: false)
+    else
+      Rails.logger.info "Done Processing Payment"
+      OpenStruct.new(succeeded?: true) # value = Pago.make_payment(params).  value.succeeded? == true
+    end
   end
 end

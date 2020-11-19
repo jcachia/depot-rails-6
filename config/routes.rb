@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'store#index', as: 'store_index'
 
   get 'store/index'
+  get 'store/error'
   resources :products do
     get :who_bought, on: :member
   end
