@@ -11,29 +11,33 @@ class UsersTest < ApplicationSystemTestCase
   end
 
   test "creating a User" do
+    # Delete the user record first to prevent legit dup error.
+    User.find(@user.id).destroy
+
     visit users_url
     click_on "New User"
 
     fill_in "Name", with: @user.name
     fill_in "Password", with: 'secret'
-    fill_in "Password confirmation", with: 'secret'
+    fill_in "Confirm",  with: 'secret'
     click_on "Create User"
 
-    assert_text "User was successfully created"
-    click_on "Back"
+    assert_text "User #{@user.name} was successfully created"
+    assert_selector "h1", text: "Users"
   end
 
   test "updating a User" do
+
     visit users_url
     click_on "Edit", match: :first
 
     fill_in "Name", with: @user.name
-    fill_in "Password", with: 'secret'
-    fill_in "Password confirmation", with: 'secret'
+    fill_in "Password", with: 'aDiffSecret'
+    fill_in "Confirm",  with: 'aDiffSecret'
     click_on "Update User"
 
-    assert_text "User was successfully updated"
-    click_on "Back"
+    assert_text "User #{@user.name} was successfully updated"
+    assert_selector "h1", text: "Users"
   end
 
   test "destroying a User" do
