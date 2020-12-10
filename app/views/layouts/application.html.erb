@@ -44,6 +44,10 @@
     </nav>
 
       <main class='<%= controller.controller_name %>'>
+        <% if notice %>
+          <aside id="notice"><%= notice %></aside>
+        <% end %>
+
         <%= yield %>
       </main>
 
