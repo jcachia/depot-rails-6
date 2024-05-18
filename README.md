@@ -1,24 +1,4 @@
-# README
+# The Rails Bookstore -- Version 6
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![image](https://github.com/jcachia/depot-rails-6/assets/2212829/8497d86c-c508-4a63-8a90-3b29f045ce18)
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
